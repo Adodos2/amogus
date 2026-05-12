@@ -1,0 +1,23 @@
+@using Umbraco.Cms.Core.Models.Blocks;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+@{
+    var content = Model.Content;
+    var title = content.Value<string>("title");
+    var bgColor = content.Value<string>("bgColor") ?? "ffffff";
+    var features = content.Value<IEnumerable<string>>("features") ?? Enumerable.Empty<string>();
+}
+
+<div class="jumbotron" style="background-color: #@bgColor.Trim('#'); padding: 60px 20px;">
+    <div class="container text-center">
+        <h1 class="display-4">@title</h1>
+        <hr class="my-4">
+        <div class="d-flex justify-content-center gap-3">
+            @foreach (var feature in features)
+            {
+                <span class="badge badge-primary p-2" style="background: rgba(0,0,0,0.1); color: #333; border: 1px solid #999;">
+                    @feature
+                </span>
+            }
+        </div>
+    </div>
+</div>
